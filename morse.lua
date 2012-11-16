@@ -12,8 +12,7 @@ local subst = {['-.-']='+', ['-.--']='-', ['-..-']='>', ['--.-']='<',
 	['--..--']='.', ['--..-']=',', ['-.-.-']='[', ['--.-']=']', }
 function ___(t) 
 	local s = t[1]:gsub("_","-"):gsub("[%.%-]+", subst)
-	print(s)
-	require('brainfuck').run(s)
+	require'brainfuck'(s)
 end
 function tomorse(bf, code)
 	local t = {}
@@ -22,6 +21,5 @@ function tomorse(bf, code)
 	if code then
 		morse = '___('..morse:gsub('-','_')..')'
 	end
-	print(morse)
+	return morse
 end
- 

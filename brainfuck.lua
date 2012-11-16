@@ -1,8 +1,6 @@
-local M = {}
-
--- Brainfuck interpreter. If you can program in Brainfuck (and in Lua), you certainly
--- don't need any explanation on the code!
-function M.run(s)
+-- Main Brainfuck interpreter. If you can program in Brainfuck (and in Lua), 
+-- you certainly don't need any explanation on the code below!
+return function(s)
   local subst = {["+"]="v=v+1 ", ["-"]="v=v-1 ", [">"]="i=i+1 ", ["<"]="i=i-1 ",
     ["."] = "w(v)", [","]="v=r()", ["["]="while v~=0 do ", ["]"]="end "}
   local env = setmetatable({ i=0, t=setmetatable({},{__index=function() return 0 end}),
@@ -10,5 +8,3 @@ function M.run(s)
     {__index=function(t,k) return t.t[t.i] end, __newindex=function(t,k,v) t.t[t.i]=v end })
   load(s:gsub("[^%+%-<>%.,%[%]]+",""):gsub(".", subst), "brainfuck", "t", env)()
 end
-
-return M
