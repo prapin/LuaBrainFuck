@@ -8,16 +8,16 @@ meta = {
 _ = setmetatable({'_'}, meta)
 __ = setmetatable({'__'}, meta)
 
-local subst = {['-.-']='+', ['-.--']='-', ['-..-']='>', ['--.-']='<', 
-	['--..--']='.', ['--..-']=',', ['-.-.-']='[', ['--.-']=']', }
+local subst = {['-.-']='+', ['-.--']='-', ['-..-']='[', ['--.-']='<', 
+	['--.--']='.', ['--..-']=',', ['-.-.-']='>', ['-..-.-']=']', }
 function ___(t) 
-	local s = t[1]:gsub("_","-"):gsub("[%.%-]+", subst)
+	local s = t[1]:gsub("_","-"):gsub("[%.%-]+", subst):gsub("/","")
 	require'brainfuck'(s)
 end
 function tomorse(bf, code)
 	local t = {}
 	for k,v in pairs(subst) do t[v]=k.."/" end
-	local morse = bf:gsub('.', t):sub(1,-2)
+	local morse = bf:gsub("[^%+%-<>%.,%[%]]+",""):gsub('.', t):sub(1,-2)
 	if code then
 		morse = '___('..morse:gsub('-','_')..')'
 	end
