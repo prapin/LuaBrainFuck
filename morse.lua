@@ -10,11 +10,11 @@ __ = setmetatable({'__'}, meta)
 
 local subst = {['-.-']='+', ['-.--']='-', ['-..-']='[', ['--.-']='<', 
 	['--.--']='.', ['--..-']=',', ['-.-.-']='>', ['-..-.-']=']', }
-function ___(t) 
-	local s = t[1]:gsub("_","-"):gsub("[%.%-]+", subst):gsub("/","")
-	require'brainfuck'(s)
+function ___(p) 
+	require'brainfuck'(tostring(p):gsub("_","-"):gsub("[%.%-]+", subst):gsub("/",""))
 end
-function tomorse(bf, code)
+local M = {}
+function M.tomorse(bf, code)
 	local t = {}
 	for k,v in pairs(subst) do t[v]=k.."/" end
 	local morse = bf:gsub("[^%+%-<>%.,%[%]]+",""):gsub('.', t):sub(1,-2)
@@ -23,3 +23,4 @@ function tomorse(bf, code)
 	end
 	return morse
 end
+return M
