@@ -10,7 +10,8 @@ __ = setmetatable({'__'}, meta)
 
 local subst = {['-.-']='+', ['-.--']='-', ['-..-']='[', ['--.-']='<', 
 	['--.--']='.', ['--..-']=',', ['-.-.-']='>', ['-..-.-']=']', }
-function ___(p) 
+function ___(p,a)
+	if a == _ then return print("___("..tostring(p)..",_)") end -- Quine!
 	require'brainfuck'(tostring(p):gsub("_","-"):gsub("[%.%-]+", subst):gsub("/",""))
 end
 
