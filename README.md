@@ -24,14 +24,15 @@ Confirming to the Brainfuck language specifications, any character except `+ - <
 Morse syntax
 ------------
 
-As an innovation, LuaBrainFuck supports a form a Morse code for the Brainfuck program.
+As an innovation, LuaBrainFuck supports a form of Morse code for the Brainfuck program.
 
 This enables a more unified syntax where only three characters (well, nearly) are needed to program.
+These characters are without surprise `-` (or `_`), `.` and `/`.
 
 To support Morse code syntax, you need to first call `require "morse"`. 
 
 That modules returns a table with currently only helper function: `tomorse`. 
-Most importantly, the module loading sets 3 global variables: `_`, `__`, and `___`.
+Most importantly, the module sets at loading 3 global variables: `_`, `__`, and `___`.
 
 The `___` function is the main one: it runs the morse encoded Brainfuck program. The argument is either
 a plain Morse string as in this `Hello World!` example:
@@ -43,3 +44,16 @@ a plain Morse string as in this `Hello World!` example:
 	-.-/-.-/-.-/--.--/-.--/-.--/-.--/-.--/-.--/-.--/--.--/-.--/-.--/-.--/-.--/-.--/-.--/-.--/-.--/--.--/
 	-.-.-/-.-/--.--/-.-.-/--.--]]
 	
+But passing a string to `___` could be considered as cheating. That is why a pure Lua version is also
+supported. For that, you need to use `_` instead of `-` for the long sign. The same example:
+
+	___(_._/_._/_._/_._/_._/_._/_._/_._/_._/_._/_.._/_._._/_._/_._/_._/_._/_._/_._/_._/_._._/_._/_._/
+	_._/_._/_._/_._/_._/_._/_._/_._/_._._/_._/_._/_._/_._._/_._/__._/__._/__._/__._/_.__/_.._._/_._._/
+	_._/_._/__.__/_._._/_._/__.__/_._/_._/_._/_._/_._/_._/_._/__.__/__.__/_._/_._/_._/__.__/_._._/_._/
+	_._/__.__/__._/__._/_._/_._/_._/_._/_._/_._/_._/_._/_._/_._/_._/_._/_._/_._/_._/__.__/_._._/__.__/
+	_._/_._/_._/__.__/_.__/_.__/_.__/_.__/_.__/_.__/__.__/_.__/_.__/_.__/_.__/_.__/_.__/_.__/_.__/__.__/
+	_._._/_._/__.__/_._._/__.__)
+
+Yes, it actually works! This is only a bunch of Lua indexation, division and concatenation operations. 
+
+Note: due to a limitation in Lua compiler, the number of `..` (concatenation) is limited to 200 per program.
