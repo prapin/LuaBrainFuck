@@ -13,8 +13,9 @@ local subst = {['-.-']='+', ['-.--']='-', ['-..-']='[', ['--.-']='<',
 function ___(p) 
 	require'brainfuck'(tostring(p):gsub("_","-"):gsub("[%.%-]+", subst):gsub("/",""))
 end
-local M = {}
-function M.tomorse(bf, code)
+
+return {
+export = function(bf, code)
 	local t = {}
 	for k,v in pairs(subst) do t[v]=k.."/" end
 	local morse = bf:gsub("[^%+%-<>%.,%[%]]+",""):gsub('.', t):sub(1,-2)
@@ -22,5 +23,4 @@ function M.tomorse(bf, code)
 		morse = '___('..morse:gsub('-','_')..')'
 	end
 	return morse
-end
-return M
+end }

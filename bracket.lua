@@ -11,8 +11,7 @@ local function run(a)
 	local s = table.concat(accumul)
 	accumul={}
 	if a == __ then return print("_"..s.."(_,__)") end -- Quine!
-	s=s:gsub("[%[%(%{]_*[%]%)%}]", subst)	
-	print(s)
+	require'brainfuck'(s:gsub("[%[%(%{]_*[%]%)%}]", subst))
 end
 
 local meta = {
@@ -31,3 +30,9 @@ local meta = {
 _ = setmetatable({s='_'}, meta)
 __ = setmetatable({s='__'}, meta)
 
+return {
+export = function(bf)
+	local t = {}
+	for k,v in pairs(subst) do t[v]=k end
+	return "_"..bf:gsub("[^%+%-<>%.,%[%]]+",""):gsub('.', t).."(_,_)"
+end }
