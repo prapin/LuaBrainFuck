@@ -1,7 +1,7 @@
 LuaBrainFuck
 ============
 
-_LuaBrainFuck_ is a simple module to execute Brainfuck programs under Lua.
+_LuaBrainFuck_ is a simple module to execute Brainfuck programs under Lua 5.2.
 
 In addition to the traditional syntax, it supports Morse style and bracket style.
 
