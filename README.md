@@ -104,16 +104,6 @@ is itself a perfect quine. Illustration:
 	$ lua -l morse out1.lua > out2.lua
 	$ diff out1.lua out2.lua
 	
-It is also easy to test quines in the interactive interpreter:
-
-	$ lua -l bracket
-	Lua 5.2.0  Copyright (C) 1994-2011 Lua.org, PUC-Rio
-	> _()(_,__)
-	_()(_,__)
-	> _{}()[_]{_}(_,__)
-	_{}()[_]{_}(_,__)
-	> 
-
 ### Brainfuck to Morse conversion
 
 The module function `morse.export` can be used to transform a valid Brainfuck into Morse syntax,
@@ -184,6 +174,16 @@ is itself a perfect quine. Illustration:
 	$ lua -l bracket out1.lua > out2.lua
 	$ diff out1.lua out2.lua
 	
+It is also easy to test quines in the interactive interpreter:
+
+	$ lua -l bracket
+	Lua 5.2.0  Copyright (C) 1994-2011 Lua.org, PUC-Rio
+	> _()(_,__)
+	_()(_,__)
+	> _{}()[_]{_}(_,__)
+	_{}()[_]{_}(_,__)
+	> 
+
 ### Brainfuck to bracket conversion
 
 The module function `bracket.export` can be used to transform a valid Brainfuck into bracket syntax.
