@@ -104,6 +104,15 @@ is itself a perfect quine. Illustration:
 	$ lua -l morse out1.lua > out2.lua
 	$ diff out1.lua out2.lua
 	
+A good way to test quines is with the interactive interpreter:
+
+	$ lua -l morse
+	Lua 5.2.0  Copyright (C) 1994-2011 Lua.org, PUC-Rio
+	> ____(_._)
+	____(_._)
+	> ____(__.._/_.__/_.._._)
+	____(__.._/_.__/_.._._)
+	
 ### Brainfuck to Morse conversion
 
 The module function `morse.export` can be used to transform a valid Brainfuck into Morse syntax,
